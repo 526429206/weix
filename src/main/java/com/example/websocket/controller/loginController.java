@@ -3,6 +3,8 @@ package com.example.websocket.controller;
 import com.example.websocket.entity.User;
 import com.example.websocket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class loginController {
     @Autowired
     UserService userService;
-    @RequestMapping("login")
-    public void login(User user){
-        userService.check(user);
+    @PostMapping("login")
+    public boolean login(@RequestBody User user){
+       if( userService.check(user)){
+           return true;
+       }
 
+        return false;
     }
 }

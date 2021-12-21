@@ -13,5 +13,5 @@ import com.example.websocket.entity.User;
  * @date Created in 2021-12-08 18:10
  */
 public interface UserService extends IService<User> {
-    void check(User user);
+    boolean check(User user);
 }
