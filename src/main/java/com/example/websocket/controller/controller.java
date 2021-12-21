@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class controller {
     @RequestMapping("test")
     public String te(){
-        return "test";
+        return "tet";
     }
     
 }
