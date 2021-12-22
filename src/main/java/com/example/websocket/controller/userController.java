@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.example.websocket.entity.User;
 import com.example.websocket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +15,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("user")
 public class userController {
     @Autowired
     UserService userService;
+
     @RequestMapping("list")
-    public List<User> list(){
-        QueryWrapper<User> wap=new QueryWrapper();
+    public List<User> list() {
+        QueryWrapper<User> wap = new QueryWrapper();
         LambdaQueryWrapper<User> qla = wap.lambda();
-        return userService.list(qla.eq(User::getEmail,"user1@xkcoding.com"));
+        return userService.list(qla.eq(User::getEmail, "user1@xkcoding.com"));
     }
 
     /**
      * 保存用户
+     *
      * @return
      */
     @PostMapping("save")
-    public User saveUser(@RequestBody User user){
+    public R<User> saveUser(@RequestBody User user) {
         String salt = IdUtil.fastSimpleUUID();
-        User testSave3 = User.builder()
+        User Saveuser = User.builder()
                 .name(user.getName())
                 .password(SecureUtil.md5(user.getPassword() + salt))
                 .salt(salt).email(user.getEmail())
@@ -41,8 +45,8 @@ public class userController {
                 .status(1)
                 .lastLoginTime(new DateTime())
                 .build();
-        boolean save = userService.save(testSave3);
-        return testSave3;
+        userService.save(Saveuser);
+        return R.ok(Saveuser);
 //测试数据
        /* {
             "name": "user_3",
