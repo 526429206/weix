@@ -35,7 +35,7 @@ public class WebSocketServer {
       //  session
         SessionSet.add(session);
         int cnt = OnlineCount.incrementAndGet(); // 在线数加1
-        log.info("有连接加入，当前连接数为：{}", cnt);
+        log.info("有连接加入，当前用户id：{}", session.getId());
         SendMessage(session, "连接成功");
     }
 
@@ -57,6 +57,7 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message, Session session) {
+        log.info("当前用户id：{}",session.getId());
         log.info("来自客户端的消息：{}",message);
         SendMessage(session, "收到消息，消息内容："+message);
 

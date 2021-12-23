@@ -7,6 +7,8 @@ import com.example.websocket.entity.User;
 import com.example.websocket.exception.RRException;
 import com.example.websocket.mapper.UserMapper;
 import com.example.websocket.service.UserService;
+import com.example.websocket.utill.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +23,8 @@ import java.util.Optional;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    @Autowired
+    RedisUtils redisUtils;
     @Override
     public void check(User user) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
@@ -30,5 +34,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(!loginUser.getPassword().equals(decPassWord)){
             throw new RRException("账号或密码错误！！",400);
         }
+        //在线用户存入redies
+        redisUtils.set(user.getPhoneNumber(),loginUser);
     }
 }

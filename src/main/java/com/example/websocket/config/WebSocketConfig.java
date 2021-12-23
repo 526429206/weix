@@ -19,7 +19,6 @@ public class WebSocketConfig {
      */
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
-        System.out.println("我被注入了");
         return new ServerEndpointExporter();
     }
 }
