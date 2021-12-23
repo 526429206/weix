@@ -20,8 +20,7 @@ public class loginController {
     RedisUtils redisUtils;
     @PostMapping("login")
     public R login(@RequestBody User user){
-        userService.check(user);
-        return R.ok();
+        return R.ok(userService.check(user));
     }
     //退出登入
     @PostMapping("loginOut")

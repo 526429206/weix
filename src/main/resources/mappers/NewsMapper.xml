@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.websocket.mapper.NewsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.websocket.entity.News">
+        <id column="id" property="id" />
+        <result column="send_user_id" property="sendUserId" />
+        <result column="send_user_name" property="sendUserName" />
+        <result column="recive_user_id" property="reciveUserId" />
+        <result column="recive_user_name" property="reciveUserName" />
+        <result column="message" property="message" />
+        <result column="emjo" property="emjo" />
+        <result column="picture" property="picture" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, send_user_id, send_user_name, recive_user_id, recive_user_name, message, emjo, picture
+    </sql>
+
+</mapper>

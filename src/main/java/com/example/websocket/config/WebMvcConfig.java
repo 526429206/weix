@@ -23,6 +23,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 //2.指定拦截器的url地址
                 addPathPatterns("/**").
                 //3.指定不拦截的url地址
-                excludePathPatterns("/login","/api/ws/sendOne","/test");
+                excludePathPatterns("/login","/api/ws/sendOne","/user/save");
     }
 }
